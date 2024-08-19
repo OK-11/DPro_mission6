@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.tasks.destroy
+    #@user.tasks.destroy_all
     @user.destroy
     redirect_to new_session_path
   end
