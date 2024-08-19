@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[edit update destroy ]
 
   def index
-    @tasks = Task.all
+    current_user
+    @tasks = @current_user.tasks
   end
 
   def new
@@ -10,8 +11,10 @@ class TasksController < ApplicationController
   end
 
   def create
+    current_user
     @task = Task.new(task_params)
     if @task.save
+      @current_user.tasks << @task
       redirect_to tasks_path, notice: t('.created')
     else
       render :new
@@ -19,6 +22,8 @@ class TasksController < ApplicationController
   end
 
   def show
+    current_user
+    @task = @current_user.tasks.find(params[:id])
   end
 
   def edit
@@ -33,6 +38,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    current_user
+    @user_task = @current_user.tasks.find_by(id: @task.id)
+    @current_user.tasks.destroy(@user_task)
     @task.destroy
     redirect_to tasks_path, notice: t('.destroyed')
   end

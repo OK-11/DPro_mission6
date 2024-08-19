@@ -1,0 +1,7 @@
+<div class="showuser">
+  <h1>アカウント詳細ページ</h1>
+  <h3>名前:</h3><%= @user.name %>
+  <h3>メールアドレス:</h3><%= @user.email %>
+
+  <%= link_to "編集", edit_user_path, id: "edit-user" %> | <%= link_to "削除", user_path, method: :delete, data: { confirm: "本当に削除してもよろしいですか？" }, id: "destroy-user" %>
+</div>
