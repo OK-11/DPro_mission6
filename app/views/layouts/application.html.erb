@@ -10,11 +10,7 @@
   </head>
 
   <body>
-    <% flash.each do |key, message| %>
-      <div class="alert-<%= key %>">
-        <%= message %>
-      </div>
-    <% end %>
+    <p id="notice"><%= notice %></p>
 
     <% if logged_in? %>
       <%= link_to "タスク一覧", tasks_path , id: "tasks-index" %>
@@ -26,7 +22,6 @@
       <%= link_to "ログイン", new_session_path , id: "sign-in" %>
     <% end %>
     
-    <p id="notice"><%= notice %></p>
     <%= yield %>
   </body>
 </html>
